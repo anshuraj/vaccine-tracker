@@ -11,59 +11,47 @@
       #search-btn {
         height: 30px;
       }
+      #no-slot {
+        color: red;
+      }
+      .hide {
+        display: none;
+      }
+      .show {
+        display: block;
+      }
     </style>
-    <script>
-      function searchByPIN() {
-        const pin = document.getElementById('pin').value;
-        if (pin) {
-          const date = new Date(Date.now())
-          const dateString = `${date.getDate()}-${date.getMonth()+1}-${date.getFullYear()}`;
-
-          localStorage.setItem('pin', pin);
-
-          fetch(`https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByPin?pincode=${pin}&date=${dateString}`)
-          .then(res => res.json())
-          .then(res => {
-            console.log('data', res)
-            parseAvailabilityData(res);
-          })
-          .catch(err => {
-            console.error(err);
-            alert('Some error occured!');
-          })
-        }
-      }
-
-      function parseAvailabilityData(data) {
-        let isAvailable = false;
-        data.centers.forEach(center => {
-          center.sessions.forEach(session => {
-              if (session.min_age_limit == 18 && session.available_capacity > 0) {
-                  isAvailable = true;
-              }
-          })
-        })
-        alert(isAvailable ? 'Available. Book now!' : 'Sorry, not available');
-      }
-
-      (function () {
-        window.onload = function () {
-          const pin = localStorage.getItem('pin');
-          if (pin) {
-            document.getElementById('pin').value = pin;
-            document.getElementById('search-btn').click();
-          }
-        }
-      })()
-    </script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </head>
   <body>
     <h3>Track 18+ vaccine slot availability for your location</h3>
     <p>Pin is stored so next time latest search result is ready for you</p>
     <p>Add this to your homescreen for faster access.</p>
     <p>Click three dots -> Add to homescreen -> Add on your Android</p>
-    <label for="pin"><strong>Pin code</strong></label>
-    <input type="text" name="pin" id="pin" placeholder="Enter PIN. Comma separated values accepted">
-    <button id="search-btn" onclick="searchByPIN()">Search by PIN</button>
+    
+    <div class="pin-code-search hide">
+      <label for="pin"><strong>Pin code</strong></label>
+      <input type="text" name="pin" id="pin" placeholder="Enter PIN. Comma separated values accepted">
+      <button id="search-btn" onclick="searchByPIN()">Search by PIN</button>
+    </div>
+
+
+    <div class="district-search">
+      <label for="district-selector"><strong>Select your district</strong></label>
+      <select id="district-selector">
+        <option value="" disabled></option>
+      </select>
+    </div>
+
+    <div id="results" class="hide">
+      Slots available at:
+      <ul id="results-list"></ul>
+    </div>
+
+    <div id="no-slot" class="hide">No slots available</div>
+
+    <script src="./script.js"></script>
   </body>
 </html>

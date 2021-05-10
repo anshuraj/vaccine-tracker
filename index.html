@@ -26,31 +26,44 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </head>
   <body>
-    <h3>Track 18+ vaccine slot availability for your location</h3>
-    <p>Pin is stored so next time latest search result is ready for you</p>
+    <h3>Track vaccine slot availability for your location</h3>
+    <p>Data is stored so next time latest search result is ready for you</p>
     <p>Add this to your homescreen for faster access.</p>
     <p>Click three dots -> Add to homescreen -> Add on your Android</p>
+
+    <div style="display: flex;">
+      <label><strong>Select age group: </strong></label>
+      <input type="radio" id="18+" name="age_limit" value="18">
+      <label for="18+">18+</label><br>
+      <input type="radio" id="45+" name="age_limit" value="45">
+      <label for="45+">45+</label><br>
+    </div>
     
     <div class="pin-code-search hide">
       <label for="pin"><strong>Pin code</strong></label>
-      <input type="text" name="pin" id="pin" placeholder="Enter PIN. Comma separated values accepted">
+      <input type="text" name="pin" id="pin" placeholder="Enter PIN">
       <button id="search-btn" onclick="searchByPIN()">Search by PIN</button>
     </div>
 
-
+    <br>
     <div class="district-search">
-      <label for="district-selector"><strong>Select your district</strong></label>
+      <label for="district-selector"><strong>Select your district: </strong></label>
       <select id="district-selector">
         <option value="" disabled></option>
       </select>
     </div>
 
+    <br>
     <div id="results" class="hide">
       Slots available at:
       <ul id="results-list"></ul>
     </div>
 
     <div id="no-slot" class="hide">No slots available</div>
+
+    <footer>
+      Book your slots <a href="https://selfregistration.cowin.gov.in/" target="_blank">on CoWIN site</a>
+    </footer>
 
     <script src="./script.js"></script>
   </body>

@@ -13,7 +13,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/",
+  "start_url": "/vaccine-tracker/",
   "display": "standalone",
   "background_color": "white",
   "description": "Track vaccine slots in one click from homescreen"

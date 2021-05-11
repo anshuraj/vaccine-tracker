@@ -20,10 +20,15 @@
       .show {
         display: block;
       }
+      #results-table th {
+        text-align: left;
+      }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
   </head>
   <body>
     <h3>Track vaccine slot availability for your location</h3>
@@ -55,8 +60,11 @@
 
     <br>
     <div id="results" class="hide">
-      Slots available at:
-      <ul id="results-list"></ul>
+      Slots available in next 7 day at following centers:
+      <table id="results-table" class="stripe">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
     </div>
 
     <div id="no-slot" class="hide">No slots available</div>

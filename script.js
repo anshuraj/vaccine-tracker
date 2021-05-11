@@ -1,4 +1,5 @@
 var AGE_LIMIT = 18;
+var dataTable;
 
 function searchByPIN() {
   const pin = document.getElementById('pin').value;
@@ -44,12 +45,15 @@ function parseAvailabilityData(data) {
   });
 
   if (availableCenters.length > 0) {
-    let html = '';
+    const tableData = [];
     availableCenters.forEach((center) => {
-      html += `<li>${center.name}</li>`;
+      tableData.push({ name: center.name });
     });
 
-    $('#results-list')[0].innerHTML = html;
+    dataTable.clear();
+    dataTable.rows.add(tableData);
+    dataTable.draw();
+
     $('#no-slot').attr('class', 'hide');
     $('#results').attr('class', 'show');
     alert('Available. Book on CoWIN now!');
@@ -96,6 +100,19 @@ $(document).ready(function () {
     AGE_LIMIT = localStorage.getItem('age_limit');
     $('input[name=age_limit]').val([AGE_LIMIT]);
   }
+
+  dataTable = $('#results-table').DataTable({
+    paging: false,
+    searching: false,
+    responsive: true,
+    destroy: true,
+    columns: [{ data: 'name', title: 'Center name' }],
+    language: {
+      emptyTable: 'No slots available',
+    },
+    bInfo: false,
+    bSort: false,
+  });
 
   fetch('./districts.json')
     .then((res) => res.json())

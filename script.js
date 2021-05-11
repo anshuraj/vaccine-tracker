@@ -58,11 +58,9 @@ function parseAvailabilityData(data) {
 
     $('#no-slot').attr('class', 'hide');
     $('#results').attr('class', 'show');
-    alert('Available. Book on CoWIN now!');
   } else {
     $('#no-slot').attr('class', 'show');
     $('#results').attr('class', 'hide');
-    alert('Sorry, not available');
   }
 }
 

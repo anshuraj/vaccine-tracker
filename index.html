@@ -6,6 +6,7 @@
     <style>
       body {
         padding: 15px;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       }
       #pin {
         height: 30px;
@@ -16,6 +17,7 @@
       }
       #no-slot {
         color: red;
+        font-weight: bold;
       }
       .hide {
         display: none;
@@ -26,6 +28,13 @@
       #results-table th {
         text-align: left;
       }
+      .select2-selection {
+        height: 30px !important;
+      }
+      .info {
+        font-size: 15px;
+      }
+
     </style>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.min.css" rel="stylesheet" />
@@ -35,10 +44,12 @@
   </head>
   <body>
     <h3>Track vaccine slot availability for your location</h3>
-    <p>Data is stored so next time latest search result is ready for you</p>
+    <div class="info">
+      <p>Inputs are stored so next time latest search result is ready for you</p>
     <p>Add this to your homescreen for faster access.</p>
     <p>Click three dots/share -> Add to homescreen -> Add</p>
 
+    </div>
     <div style="display: flex;">
       <label><strong>Select age group: </strong></label>
       <input type="radio" id="18+" name="age_limit" value="18">
@@ -63,14 +74,15 @@
 
     <br>
     <div id="results" class="hide">
-      Slots available in next 7 day at following centers:
+      Slots <span style="background: green; color: white;">available</span> in next 7 day at following centers:
       <table id="results-table" class="stripe">
         <thead></thead>
         <tbody></tbody>
       </table>
     </div>
 
-    <div id="no-slot" class="hide">No slots available</div>
+    <div id="no-slot" class="hide">No slots available, please try again later</div>
+    <br>
     <br>
     <footer>
       Book your slots <a href="https://selfregistration.cowin.gov.in/" target="_blank">on CoWIN site</a>

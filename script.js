@@ -17,7 +17,6 @@ function searchByPIN() {
     )
       .then((res) => res.json())
       .then((res) => {
-        console.log('data', res);
         parseAvailabilityData(res);
       })
       .catch((err) => {
@@ -37,7 +36,6 @@ function parseAvailabilityData(data) {
         session.available_capacity > 1
       ) {
         isAvailable = true;
-        console.log(center);
       }
     });
     if (isAvailable) {
@@ -76,7 +74,6 @@ function searchByDistrict(district_id) {
   )
     .then((res) => res.json())
     .then((res) => {
-      console.log('data', res);
       parseAvailabilityData(res);
     })
     .catch((err) => {
@@ -91,6 +88,12 @@ $(document).ready(function () {
   //   document.getElementById('pin').value = pin;
   //   document.getElementById('search-btn').click();
   // }
+
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js').then(function () {
+      console.log('SW registered');
+    });
+  }
 
   if (localStorage.getItem('age_limit')) {
     AGE_LIMIT = localStorage.getItem('age_limit');

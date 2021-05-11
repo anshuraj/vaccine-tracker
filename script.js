@@ -1,14 +1,15 @@
 var AGE_LIMIT = 18;
 var dataTable;
 
+const date = new Date(Date.now());
+const dateString = `${('0' + date.getDate()).slice(-2)}-${(
+  '0' +
+  (date.getMonth() + 1)
+).slice(-2)}-${date.getFullYear()}`;
+
 function searchByPIN() {
   const pin = document.getElementById('pin').value;
   if (pin) {
-    const date = new Date(Date.now());
-    const dateString = `${date.getDate()}-${
-      date.getMonth() + 1
-    }-${date.getFullYear()}`;
-
     localStorage.setItem('pin', pin);
 
     fetch(
@@ -33,9 +34,10 @@ function parseAvailabilityData(data) {
     center.sessions.forEach((session) => {
       if (
         session.min_age_limit == AGE_LIMIT &&
-        session.available_capacity > 0
+        session.available_capacity > 1
       ) {
         isAvailable = true;
+        console.log(center);
       }
     });
     if (isAvailable) {
@@ -68,10 +70,6 @@ function searchByDistrict(district_id) {
   if (!district_id) {
     return;
   }
-  const date = new Date(Date.now());
-  const dateString = `${date.getDate()}-${
-    date.getMonth() + 1
-  }-${date.getFullYear()}`;
 
   localStorage.setItem('district_id', district_id);
 

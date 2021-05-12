@@ -68,6 +68,9 @@ function searchByDistrict(district_id) {
   }
 
   localStorage.setItem('district_id', district_id);
+  $('#no-slot').attr('class', 'hide');
+  $('#results').attr('class', 'hide');
+  $('#loading').attr('class', 'show');
 
   fetch(
     `https://cdn-api.co-vin.in/api/v2/appointment/sessions/public/calendarByDistrict?district_id=${district_id}&date=${dateString}`
@@ -79,6 +82,9 @@ function searchByDistrict(district_id) {
     .catch((err) => {
       console.error(err);
       alert('Some error occured!');
+    })
+    .finally(() => {
+      $('#loading').attr('class', 'hide');
     });
 }
 
